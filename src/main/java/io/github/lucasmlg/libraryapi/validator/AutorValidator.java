@@ -1,6 +1,6 @@
 package io.github.lucasmlg.libraryapi.validator;
 
-import io.github.lucasmlg.libraryapi.exceptions.RegistroDuplicado;
+import io.github.lucasmlg.libraryapi.exceptions.RegistroDuplicadoException;
 import io.github.lucasmlg.libraryapi.model.Autor;
 import io.github.lucasmlg.libraryapi.repository.AutorRepository;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class AutorValidator {
 
     public void validarAutor(Autor autor){
         if (existeAutorCadastrado(autor)){
-            throw new RegistroDuplicado("Autor já está cadastrado!");
+            throw new RegistroDuplicadoException("Autor já está cadastrado!");
         }
     }
 

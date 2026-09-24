@@ -4,7 +4,7 @@ package io.github.lucasmlg.libraryapi.controller;
 import io.github.lucasmlg.libraryapi.controller.dto.AutorDTO;
 import io.github.lucasmlg.libraryapi.controller.dto.ErroResposta;
 import io.github.lucasmlg.libraryapi.exceptions.OperacaoNaoPermitidaException;
-import io.github.lucasmlg.libraryapi.exceptions.RegistroDuplicado;
+import io.github.lucasmlg.libraryapi.exceptions.RegistroDuplicadoException;
 import io.github.lucasmlg.libraryapi.model.Autor;
 import io.github.lucasmlg.libraryapi.service.AutorService;
 import jakarta.validation.Valid;
@@ -35,7 +35,7 @@ public class AutorController {
             autorService.saveAutor(autor);
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();
             return ResponseEntity.created(location).build();
-        } catch(RegistroDuplicado e){
+        } catch(RegistroDuplicadoException e){
             var erroDTO = ErroResposta.conflito(e.getMessage());
             return ResponseEntity.status(erroDTO.status()).body(erroDTO);
         }
@@ -96,7 +96,7 @@ public class AutorController {
 
             autorService.saveAutor(autor);
             return ResponseEntity.noContent().build();
-        }catch(RegistroDuplicado e){
+        }catch(RegistroDuplicadoException e){
             var erroDTO = ErroResposta.conflito(e.getMessage());
             return ResponseEntity.status(erroDTO.status()).body(erroDTO);
         }
