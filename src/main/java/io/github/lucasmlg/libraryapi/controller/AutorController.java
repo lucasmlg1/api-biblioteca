@@ -6,7 +6,6 @@ import io.github.lucasmlg.libraryapi.controller.dto.ErroResposta;
 import io.github.lucasmlg.libraryapi.exceptions.OperacaoNaoPermitidaException;
 import io.github.lucasmlg.libraryapi.exceptions.RegistroDuplicado;
 import io.github.lucasmlg.libraryapi.model.Autor;
-import io.github.lucasmlg.libraryapi.repository.AutorRepository;
 import io.github.lucasmlg.libraryapi.service.AutorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
