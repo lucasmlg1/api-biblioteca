@@ -20,7 +20,7 @@ public class LivroController implements GenericController {
     private final LivroMapper mapper;
 
     @PostMapping()
-    public ResponseEntity<Object> salvar(@RequestBody @Valid CadastroLivroDTO dto){
+    public ResponseEntity<Void> salvar(@RequestBody @Valid CadastroLivroDTO dto){
         try{
             Livro livro = mapper.toEntity(dto);
             service.salvar(livro);
