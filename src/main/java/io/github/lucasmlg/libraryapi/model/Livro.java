@@ -49,9 +49,6 @@ public class Livro {
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
 
-    @Column(name = "data_nascimento", nullable = false)
-    private LocalDate dataNascimento;
-
     @Column(name="id_usuario")
     private UUID idUsuario;
 
