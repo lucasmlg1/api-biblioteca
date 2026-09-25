@@ -24,7 +24,7 @@ public class LivroController {
              // salvar na base
             //criar url para acesso dos dados do livro
             //retornar codigo created com header location
-            
+
 
             return ResponseEntity.ok(cadastroLivroDTO);
         }catch(RegistroDuplicadoException e){
