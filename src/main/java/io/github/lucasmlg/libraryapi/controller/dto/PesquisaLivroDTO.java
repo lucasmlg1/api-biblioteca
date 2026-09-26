@@ -11,6 +11,6 @@ public record PesquisaLivroDTO(UUID id, String isbn,
                                LocalDate dataPublicacao,
                                GeneroLivro genero,
                                BigDecimal preco,
-                               AutorDTO autorDTO
+                               AutorDTO autor
                                 ) {
 }

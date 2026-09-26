@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface LivroRepository extends JpaRepository<Livro, UUID> {
@@ -71,6 +72,14 @@ public interface LivroRepository extends JpaRepository<Livro, UUID> {
     @Transactional
     @Query(" update Livro set dataPublicacao = ?1")
     void updateDataAplicacao(LocalDate novaData);
+
+    @Query("""
+        select l
+        from Livro l
+        join fetch l.autor
+        where l.id = :id
+    """)
+    Optional<Livro> findByIdComAutor(@Param("id") UUID id);
 
     boolean existsByAutor(Autor autor);
 }
