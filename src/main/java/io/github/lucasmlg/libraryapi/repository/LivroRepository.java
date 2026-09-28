@@ -5,6 +5,7 @@ import io.github.lucasmlg.libraryapi.model.GeneroLivro;
 import io.github.lucasmlg.libraryapi.model.Livro;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface LivroRepository extends JpaRepository<Livro, UUID> {
+public interface LivroRepository extends JpaRepository<Livro, UUID>, JpaSpecificationExecutor<Livro> {
 
     List<Livro> findByTitulo(String titulo);
     // select * from livro where titulo = titulo;

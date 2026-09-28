@@ -1,13 +1,19 @@
 package io.github.lucasmlg.libraryapi.service;
 
 
+import io.github.lucasmlg.libraryapi.model.GeneroLivro;
 import io.github.lucasmlg.libraryapi.model.Livro;
 import io.github.lucasmlg.libraryapi.repository.LivroRepository;
+import io.github.lucasmlg.libraryapi.repository.specs.LivroSpecs;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static io.github.lucasmlg.libraryapi.repository.specs.LivroSpecs.*;
 
 @Service
 @RequiredArgsConstructor
@@ -24,5 +30,27 @@ public class LivroService {
     }
     public void deletar(Livro livro){
         livroRepository.delete(livro);
+    }
+
+    public List<Livro> pesquisa(String isbn, String titulo, String nomeAutor, GeneroLivro genero, Integer dataPublicacao){
+
+        Specification<Livro> specs = Specification.where((root, query, cb) ->  cb.conjunction() );
+
+        if(isbn != null){
+            specs = specs.and(isbnEqual(isbn));
+        }
+
+        if(titulo != null){
+            specs = specs.and(tituloLike(titulo));
+        }
+
+        if(genero != null){
+            specs = specs.and(generoEqual(genero));
+        }
+        if (dataPublicacao != null){
+            specs = specs.and(anoPublicacaoEqual(dataPublicacao));
+        }
+
+        return livroRepository.findAll(specs);
     }
 }
