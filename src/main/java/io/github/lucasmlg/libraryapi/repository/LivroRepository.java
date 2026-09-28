@@ -26,7 +26,7 @@ public interface LivroRepository extends JpaRepository<Livro, UUID>, JpaSpecific
     List<Livro> findByAutor(Autor autor);
 
     //select * from livro where l.isbn = isbn
-    List<Livro> findByIsbn(String isbn);
+    Optional<Livro> findByIsbn(String isbn);
 
     List<Livro> findByTituloAndPreco(String titulo, BigDecimal preco);
 

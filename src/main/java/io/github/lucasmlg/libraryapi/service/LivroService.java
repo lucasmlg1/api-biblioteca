@@ -5,6 +5,7 @@ import io.github.lucasmlg.libraryapi.model.GeneroLivro;
 import io.github.lucasmlg.libraryapi.model.Livro;
 import io.github.lucasmlg.libraryapi.repository.LivroRepository;
 import io.github.lucasmlg.libraryapi.repository.specs.LivroSpecs;
+import io.github.lucasmlg.libraryapi.validator.LivroValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,11 @@ import static io.github.lucasmlg.libraryapi.repository.specs.LivroSpecs.*;
 public class LivroService {
 
     private final LivroRepository livroRepository;
+    private final LivroValidator validator;
 
     public Livro salvar(Livro livro) {
+
+        validator.validar(livro);
         return livroRepository.save(livro);
     }
 
@@ -58,6 +62,7 @@ public class LivroService {
         if (livro.getId() == null){
             throw new IllegalArgumentException("Para atualizar um livro, é necessário que ele já exista!");
         }
+        validator.validar(livro);
         livroRepository.save(livro);
     }
 }
