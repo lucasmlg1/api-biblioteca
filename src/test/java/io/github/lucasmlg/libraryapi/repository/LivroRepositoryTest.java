@@ -26,12 +26,12 @@ public class LivroRepositoryTest {
     void salvarTest(){
         Livro livro = new Livro();
         livro.setDataPublicacao(LocalDate.of(2000,12,31));
-        livro.setGenero(GeneroLivro.CIENCIA);
+        livro.setGenero(GeneroLivro.MISTERIO);
         livro.setPreco(BigDecimal.valueOf(100.20));
-        livro.setIsbn("Aniplex");
-        livro.setTitulo("Dr. Tenma");
+        livro.setIsbn("978-85-359-1484-9");
+        livro.setTitulo("Dom Casmurro");
 
-        Autor autor = autorRepository.findById(UUID.fromString("4b31ac55-aac3-4bcf-b602-077c4b3b16f7")).orElse(null);
+        Autor autor = autorRepository.findById(UUID.fromString("3d542ff6-2bbe-48f9-95df-03f1cca0f9a5")).orElse(null);
 
         livro.setAutor(autor);
         livroRepository.save(livro);

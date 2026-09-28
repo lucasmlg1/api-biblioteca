@@ -29,7 +29,6 @@ public class LivroSpecs {
             return cb.like(cb.upper(autor.get("nome")), "%" + nomeAutor.toUpperCase() + "%");
         };
         // return cb.like(cb.upper(root.get("autor").get("nome")), "%" + nomeAutor.toUpperCase() + "%");
-
     }
 
 
@@ -38,6 +37,8 @@ public class LivroSpecs {
                     //select to_char(data_publicacao, 'YYYY') from livro;
                     -> cb.equal(cb.function("to_char", String.class, root.get("dataPublicacao"), cb.literal("YYYY")), anoPublicacao.toString());
         }
+
+
 
 
 

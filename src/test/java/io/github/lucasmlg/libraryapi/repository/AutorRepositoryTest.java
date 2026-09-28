@@ -27,7 +27,7 @@ public class AutorRepositoryTest {
     @Test
     public void salvarTest(){
         Autor autor = new Autor();
-        autor.setNome("Lucas");
+        autor.setNome("Machado de Assis");
         autor.setNacionalidade("Brasileiro");
         autor.setDataNascimento(LocalDate.of(2006,4,27));
 

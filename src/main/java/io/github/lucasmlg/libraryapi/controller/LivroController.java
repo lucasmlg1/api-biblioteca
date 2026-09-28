@@ -10,6 +10,7 @@ import io.github.lucasmlg.libraryapi.model.Livro;
 import io.github.lucasmlg.libraryapi.service.LivroService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,4 +70,22 @@ public class LivroController implements GenericController {
         return ResponseEntity.ok(lista);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Object> atualizar
+            (@PathVariable("id") String id, @RequestBody @Valid CadastroLivroDTO dto){
+        return service.obterPorId(UUID.fromString(id))
+                .map(livro -> {
+                    Livro entityAux = mapper.toEntity(dto);
+                    livro.setDataPublicacao(entityAux.getDataPublicacao());
+                    livro.setPreco(entityAux.getPreco());
+                    livro.setIsbn(entityAux.getIsbn());
+                    livro.setAutor(entityAux.getAutor());
+                    livro.setTitulo(entityAux.getTitulo());
+                    livro.setGenero(entityAux.getGenero());
+
+                    service.atualizar(livro);
+
+                    return ResponseEntity.noContent().build();
+                }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
