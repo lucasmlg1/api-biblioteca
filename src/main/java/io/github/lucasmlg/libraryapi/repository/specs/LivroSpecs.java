@@ -2,6 +2,8 @@ package io.github.lucasmlg.libraryapi.repository.specs;
 
 import io.github.lucasmlg.libraryapi.model.GeneroLivro;
 import io.github.lucasmlg.libraryapi.model.Livro;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 
 public class LivroSpecs {
@@ -18,6 +20,16 @@ public class LivroSpecs {
     public static Specification<Livro> generoEqual(GeneroLivro generoLivro) {
         return (root, query, criteriaBuilder)
                 -> criteriaBuilder.equal(root.get("genero"), generoLivro);
+    }
+
+    public static Specification<Livro> nomeAutorEqual(String nomeAutor) {
+        return (root, query, cb)
+                -> {
+            Join<Object, Object> autor = root.join("autor", JoinType.LEFT);
+            return cb.like(cb.upper(autor.get("nome")), "%" + nomeAutor.toUpperCase() + "%");
+        };
+        // return cb.like(cb.upper(root.get("autor").get("nome")), "%" + nomeAutor.toUpperCase() + "%");
+
     }
 
 
